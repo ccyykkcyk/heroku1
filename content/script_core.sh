@@ -105,9 +105,9 @@ UPLOAD_FOLDER() {
 }
 
 SEND_TG_MSG() {
-    if [[ -f "${MSG_PATH}" ]] && [[ "${TG_EXCLUDE_FILE_EXTENSION}" != "" ]] && [[ "${TASK_FILE_NAME}" =~ \.(${TG_EXCLUDE_FILE_EXTENSION})$ ]]; then
+    if [[ -f "${MSG_PATH}" ]] && [[ "${TG_EXCLUDE_FILE_EXTENSION}" != "" ]] && [[ "${FILE_NAME}" =~ \.(${TG_EXCLUDE_FILE_EXTENSION})$ ]]; then
         exit 0
-    elif [[ -f "${MSG_PATH}" ]] && [[ "${TG_INCLUDE_FILE_EXTENSION}" != "" ]] && [[ ! "${TASK_FILE_NAME}" =~ \.(${TG_INCLUDE_FILE_EXTENSION})$ ]]; then
+    elif [[ -f "${MSG_PATH}" ]] && [[ "${TG_INCLUDE_FILE_EXTENSION}" != "" ]] && [[ ! "${FILE_NAME}" =~ \.(${TG_INCLUDE_FILE_EXTENSION})$ ]]; then
         exit 0
     fi
     if [ "${TELEGRAM_CHAT_ID}" != "" ]; then
@@ -125,17 +125,17 @@ SEND_TG_MSG() {
 
 SEND_TG_FINISHED() {
     if [ "${GLOBAL_LANGUAGE}" = "chs" ]; then
-        SEND_TG_MSG "${APP}" "${FOLDER_NAME} 下载已完成"
+        SEND_TG_MSG "${APP}" "${FOLDER_NAME} 任务已完成"
     else
-        SEND_TG_MSG "${APP}" "${FOLDER_NAME} download completed"
+        SEND_TG_MSG "${APP}" "${FOLDER_NAME} task completed"
     fi
 }
 
 SEND_TG_FINISHED_TO_RCLONE() {
     if [ "${GLOBAL_LANGUAGE}" = "chs" ]; then
-        SEND_TG_MSG "${APP}" "${FOLDER_NAME} 下载已完成并发送上传任务至 Rclone"
+        SEND_TG_MSG "${APP}" "${FOLDER_NAME} 任务已完成并发送上传任务至 Rclone"
     else
-        SEND_TG_MSG "${APP}" "${FOLDER_NAME} download completed and send upload job to Rclone"
+        SEND_TG_MSG "${APP}" "${FOLDER_NAME} task completed and send upload job to Rclone"
     fi
 }
 
